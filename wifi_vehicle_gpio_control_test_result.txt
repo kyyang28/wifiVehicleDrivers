@@ -1,0 +1,23 @@
+
+							GPIO																Control or not?						Expansion port pin				Purpose		
+    MX6Q_PAD_NANDF_CS0__GPIO_6_11,									   	ok													4									buzzer
+    MX6Q_PAD_NANDF_ALE__GPIO_6_8,											 	ok													6									ds18b20
+    MX6Q_PAD_NANDF_CLE__GPIO_6_7,												ok													8										
+    MX6Q_PAD_NANDF_WP_B__GPIO_6_9,											ok													10
+    MX6Q_PAD_NANDF_RB0__GPIO_6_10,											ok													12
+    MX6Q_PAD_NANDF_D0__GPIO_2_0,												ok													14
+    MX6Q_PAD_NANDF_D1__GPIO_2_1,												ok													16
+    MX6Q_PAD_NANDF_D2__GPIO_2_2,												ok													18
+    MX6Q_PAD_NANDF_D3__GPIO_2_3,												ok													20
+    MX6Q_PAD_NANDF_D4__GPIO_2_4,												ok													22
+    MX6Q_PAD_NANDF_D5__GPIO_2_5,												ok													24
+    MX6Q_PAD_NANDF_D6__GPIO_2_6,												ok													26			
+    MX6Q_PAD_NANDF_D7__GPIO_2_7,												ok													28								Ultra_echo2
+    MX6Q_PAD_SD4_CLK__GPIO_7_10,												ok												  30								Ultra_trig2
+    MX6Q_PAD_SD4_CMD__GPIO_7_9,													ok													32								Ultra_echo1
+    MX6Q_PAD_SD4_DAT0__GPIO_2_8,												ok													34								Ultra_trig1
+
+    MX6Q_PAD_SD4_DAT3__GPIO_2_11,												ok													1
+    MX6Q_PAD_GPIO_18__GPIO_7_13,												ok													20
+    MX6Q_PAD_GPIO_3__GPIO_1_3,													NO													22				do not matter
+    MX6Q_PAD_GPIO_17__GPIO_7_12,												ok													24
