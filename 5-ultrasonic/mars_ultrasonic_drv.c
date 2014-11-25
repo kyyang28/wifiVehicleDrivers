@@ -6,14 +6,14 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h> /* module_param */
 #include <linux/device.h>
-#include <asm/uaccess.h> 
+#include <asm/uaccess.h>
 #include <linux/delay.h>
-#include <linux/ioport.h> 
-#include <asm/io.h> 
+#include <linux/ioport.h>
+#include <asm/io.h>
 #include <linux/gpio.h>
 #include <linux/clk.h>
 #include <linux/wait.h>
-#include <linux/jiffies.h> 
+#include <linux/jiffies.h>
 #include <linux/time.h>
 #include <linux/miscdevice.h>
 

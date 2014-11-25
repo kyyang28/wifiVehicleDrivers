@@ -1,5 +1,6 @@
 
 							GPIO																Control or not?						Expansion port pin				Purpose		
+    /* J10 */
     MX6Q_PAD_NANDF_CS0__GPIO_6_11,									   	ok													4									buzzer
     MX6Q_PAD_NANDF_ALE__GPIO_6_8,											 	ok													6									ds18b20
     MX6Q_PAD_NANDF_CLE__GPIO_6_7,												ok													8										
@@ -17,7 +18,17 @@
     MX6Q_PAD_SD4_CMD__GPIO_7_9,													ok													32								Ultra_echo1
     MX6Q_PAD_SD4_DAT0__GPIO_2_8,												ok													34								Ultra_trig1
 
-    MX6Q_PAD_SD4_DAT3__GPIO_2_11,												ok													1
-    MX6Q_PAD_GPIO_18__GPIO_7_13,												ok													20
-    MX6Q_PAD_GPIO_3__GPIO_1_3,													NO													22				do not matter
-    MX6Q_PAD_GPIO_17__GPIO_7_12,												ok													24
+    /* J11 */
+    MX6Q_PAD_SD4_DAT3__GPIO_2_11,       // LCD1602_RS       pin01
+    MX6Q_PAD_GPIO_18__GPIO_7_13,        // LCD1602_RW       pin20
+    //MX6Q_PAD_GPIO_3__GPIO_1_3,
+    MX6Q_PAD_GPIO_17__GPIO_7_12,        // LCD1602_E        pin24
+    MX6Q_PAD_CSI0_DAT4__GPIO_5_22,      // LCD1602_D0       pin25		ok
+    MX6Q_PAD_CSI0_DAT5__GPIO_5_23,      // LCD1602_D1       pin27		ok	
+    MX6Q_PAD_CSI0_DAT6__GPIO_5_24,      // LCD1602_D2       pin29		ok
+    MX6Q_PAD_CSI0_DAT7__GPIO_5_25,      // LCD1602_D3       pin31		ok
+    
+    MX6Q_PAD_KEY_ROW2__GPIO_4_11,       // LCD1602_D4       pin33		fail
+    MX6Q_PAD_KEY_COL2__GPIO_4_10,       // LCD1602_D5       pin35		fail
+    MX6Q_PAD_KEY_ROW4__GPIO_4_15,       // LCD1602_D6       pin37		ok
+    MX6Q_PAD_KEY_COL4__GPIO_4_14,       // LCD1602_D7       pin39		ok

@@ -35,23 +35,16 @@ int main(int argc, char *argv[])
         printf("[USER]Open %s successfully!\n", DS18B20_DEV);
     }
 
-    //while (1) 
-    {
-        /* 
-         * Here we need to read twice, because the first tmp contains the fault tmp value, 
-         * the second tmp is the correct temperature value.
-         */
-        read(iFd, &tmp, sizeof(tmp));
+    while (1) {
         read(iFd, &tmp, sizeof(tmp));
 
         temperature = tmp * TEMP_CONVERT_RATIO_FOR_12BIT;
         //printf("tmp: %d\n", tmp);
         printf("the current temperature is: %1.4f\n", temperature);
 
-        //ds18b20_delay(500);
+        ds18b20_delay(500);
     }
-    
-    //close(iFd);
+        
     return 0;
 }
 

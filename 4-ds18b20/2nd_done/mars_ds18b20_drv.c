@@ -40,7 +40,7 @@ static struct mars_ds18b20_dev *mars_ds18b20_devp;
 static int mars_ds18b20_hw_init(void)
 {
     int status = 0;
-    //gpio_free(MARS_DS18B20_NANDF_ALE_GPIO_6_8_PIN);
+    gpio_free(MARS_DS18B20_NANDF_ALE_GPIO_6_8_PIN);
     status = gpio_request(MARS_DS18B20_NANDF_ALE_GPIO_6_8_PIN, "ds18b20\n");
     if (status < 0) {
         printk("Failed to request gpio for ds18b20\n");
@@ -68,7 +68,7 @@ static int ds18b20_reset(void)
     udelay(2);
 
     /* Pull down the ds18b20 and reset it */
-    gpio_set_value(MARS_DS18B20_NANDF_ALE_GPIO_6_8_PIN, 0);
+    gpio_set_value(MARS_DS18B20_NANDF_ALE_GPIO_6_8_PIN, 0)
 
     /* Hold the low level to 500us */
     udelay(500);
@@ -162,7 +162,7 @@ static unsigned char ds18b20_read_byte(void)
 
         gpio_direction_input(MARS_DS18B20_NANDF_ALE_GPIO_6_8_PIN);
         if (gpio_get_value(MARS_DS18B20_NANDF_ALE_GPIO_6_8_PIN))
-            data |= 0x80;
+            data |= 0x80;  
         udelay(80);  
     }
 
@@ -185,13 +185,9 @@ static unsigned char ds18b20_read_byte(void)
 
 static int mars_ds18b20_open(struct inode *inode, struct file *filp)
 {
-    int flag = 0;
-    int ret = 0;
-    ret = mars_ds18b20_hw_init();
-    if (ret)
-        return ret;
+    int flag = 0;  
   
-    flag = ds18b20_reset();
+    flag = ds18b20_reset();  
     if (flag & 0x01) {  
         printk(KERN_WARNING "[%s] ds18b20 is failed at line %d!\n", __FUNCTION__, __LINE__);
         return -1;  
@@ -309,7 +305,11 @@ static int __init ds18b20_drv_init(void)
         kfree(mars_ds18b20_devp);
 		return PTR_ERR(mars_ds18b20_devp->ds18b20_dev);
 	}
-            
+
+    ret = mars_ds18b20_hw_init();
+    if (ret)
+        return ret;
+        
 	printk(MARS_DS18B20_NAME" is initialized!!\n");
     
     return 0;
@@ -318,7 +318,7 @@ module_init(ds18b20_drv_init);
 
 static void __exit ds18b20_drv_exit(void)
 {
-    //gpio_free(MARS_DS18B20_NANDF_ALE_GPIO_6_8_PIN);
+    gpio_free(MARS_DS18B20_NANDF_ALE_GPIO_6_8_PIN);
     device_destroy(mars_ds18b20_devp->ds18b20_cls, MKDEV(mars_ds18b20_major, 0));
     class_destroy(mars_ds18b20_devp->ds18b20_cls);
     cdev_del(&mars_ds18b20_devp->cdev);
