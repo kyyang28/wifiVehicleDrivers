@@ -39,8 +39,9 @@
 
 #define GET_HIGHLVL_DURATION(ECHO, HIGHLVL_DUR) { \
     do { \
+        int timeout = 0; \
         while (GET_ECHO(ECHO) == 0); \
-        while (GET_ECHO(ECHO) != 0) { \
+        while ((GET_ECHO(ECHO) != 0) && (timeout++ < 1000)) { \
             udelay(10); \
             HIGHLVL_DUR++; \
         } \
@@ -97,7 +98,7 @@ static int ultrasonic1_gpio_config(void)
     else
         printk("Request Ultra_trig successfully!\n");
         
-    gpio_direction_output(TRIG1, OUTPUT_DIR);
+    gpio_direction_output(TRIG1, 0);
     gpio_direction_input(ECHO1);
     return 0;
 }
