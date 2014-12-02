@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
         //LcdCommandWrite(0x01);  // 屏幕清空，光标位置归零
         ioctl(mars_lcd1602_fd, LCD1602_WRITE_CMD, 0x01);
         usleep(10);
+
+#if 1
         //LcdCommandWrite(0x80+3);
         ioctl(mars_lcd1602_fd, LCD1602_WRITE_CMD, 0x80+2);      // Cursor at first line, pos 4
         usleep(10);
@@ -41,7 +43,8 @@ int main(int argc, char *argv[])
         ioctl(mars_lcd1602_fd, LCD1602_WRITE_DATA, 'l');
         ioctl(mars_lcd1602_fd, LCD1602_WRITE_DATA, 'e');
         ioctl(mars_lcd1602_fd, LCD1602_WRITE_DATA, 's');
-        usleep(5000);
+        sleep(2);
+#endif        
     }
 
     while (1);

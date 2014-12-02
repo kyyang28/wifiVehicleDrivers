@@ -66,7 +66,7 @@ static struct mars_motor_dev *mars_motor_devp;
 
 /* ############################################ GPIO related operations ############################################ */
 static void Free_Mars_Gpio(unsigned gpio)
-{    
+{
     gpio_free(gpio);
 }
 
