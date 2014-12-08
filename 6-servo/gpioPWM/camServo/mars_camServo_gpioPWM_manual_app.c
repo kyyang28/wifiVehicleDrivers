@@ -45,14 +45,16 @@ int main(int argc, char **argv)
     iRet = open_mars_camServo_gpioPWM();
     if (iRet < 0)
         return -1;
-    
-    val = 1;            // high level
+
+    // high level
+    val = 1;
     write(iCamServoFd, &val, 1);
-    usleep(dutyCycle*1000);             // 1ms
-    
-    val = 0;            // low level
+    usleep(dutyCycle*1000);             // highLevel = dutyCycle * 1000 = dutyCylce (ms). e.g. 1ms, 1.5ms etc
+
+    // low level
+    val = 0;
     write(iCamServoFd, &val, 1);
-    usleep(20*1000 - dutyCycle*1000);
+    usleep(20*1000 - dutyCycle*1000);   // lowLevel = 20ms - dutyCycle*1000 = 20*1000 - dutyCycle*1000 = 20ms - 1ms or 1.5ms = 19ms or 18.5ms etc.
     
 #if 0
     /* Change the usleep value to manually control the duty cycle */
