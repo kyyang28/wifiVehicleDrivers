@@ -17,13 +17,10 @@
 #include <linux/time.h>
 #include <linux/miscdevice.h>
 
-#define DEVICE_NAME                         "mars_ultrasonic"
+#define DEVICE_NAME                         "mars_ultrasonic_1st"
 
 #define ECHO1                               IMX_GPIO_NR(7,9)                // J10 pin32, ECHO1
 #define TRIG1                               IMX_GPIO_NR(2,8)                // J10 pin34, TRIG1
-
-#define ECHO2                               IMX_GPIO_NR(2,7)                // J10 pin28, ECHO2
-#define TRIG2                               IMX_GPIO_NR(7,10)               // J10 pin30, TRIG2
 
 #define GET_ECHO(x)                         (gpio_get_value(x))
 #define SET_TRIG(x, data)                   (gpio_set_value(x, data))
@@ -48,25 +45,14 @@
     }while (0); \
 }
 
-static int highlvl_duration[2] = {0};
+static int highlvl_duration = 0;
 
 static void read_data(void)
 {
-    memset(highlvl_duration, 0, sizeof(highlvl_duration));
-
     /* Ultrasonic 1 */
     ENABLE_ULTRA(TRIG1);
     //printk("%s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
-    GET_HIGHLVL_DURATION(ECHO1, highlvl_duration[0]);
-    //printk("%s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
-
-    /* Avoid the reflect signal to influence the echo signal */
-    mdelay(60);
-
-    /* Ultrasonic 2 */
-    ENABLE_ULTRA(TRIG2);
-    //printk("%s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
-    GET_HIGHLVL_DURATION(ECHO2, highlvl_duration[1]);
+    GET_HIGHLVL_DURATION(ECHO1, highlvl_duration);
     //printk("%s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
     /* Avoid the reflect signal to influence the echo signal */
@@ -103,43 +89,16 @@ static int ultrasonic1_gpio_config(void)
     return 0;
 }
 
-static int ultrasonic2_gpio_config(void)
-{    
-	gpio_free(ECHO2);
-	gpio_free(TRIG2);
-
-    if (gpio_request(ECHO2, "Ultra_echo2\n"))
-        return -EBUSY;
-    else
-        printk("Request Ultra_echo successfully!\n");
-    
-    if (gpio_request(TRIG2, "Ultra_trig2\n"))
-        return -EBUSY;
-    else
-        printk("Request Ultra_trig successfully!\n");
-        
-    gpio_direction_output(TRIG2, 0);
-    gpio_direction_input(ECHO2);
-    return 0;
-}
-
 static void ultrasonic1_gpio_free(void)
 {
 	gpio_free(ECHO1);
 	gpio_free(TRIG1);
 }
 
-static void ultrasonic2_gpio_free(void)
-{
-	gpio_free(ECHO2);
-	gpio_free(TRIG2);
-}
-
 static int ultrasonic_open(struct inode *inode, struct file *file)
 {
 	printk("ultrasonic open\n");
     ultrasonic1_gpio_config();
-    ultrasonic2_gpio_config();
 	return 0;
 }
 
@@ -147,7 +106,6 @@ static int ultrasonic_release(struct inode *inode, struct file *file)
 {
 	printk("ultrasonic release\n");    
     ultrasonic1_gpio_free();
-    ultrasonic2_gpio_free();
 	return 0; 
 }
 

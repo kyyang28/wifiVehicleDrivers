@@ -212,7 +212,7 @@ static ssize_t mars_ds18b20_read(struct file *filp, char __user *buf,
         printk(KERN_WARNING "ds18b20 init failed\n");
         return -1;
     }
-  
+      
     ds18b20_write_byte(0xcc);
     ds18b20_write_byte(0x44);
   

@@ -34,8 +34,6 @@ static struct class *mars_buzzer_cls = NULL;
 
 static void mars_buzzer_drv_cleanup_module(void);
 
-//#define GPIO_TO_PIN(bank, gpio)             (32 * (bank) + (gpio))    // TI AM3359
-
 #define MARS_BUZZER_GPIO6_11_PIN                IMX_GPIO_NR(6,11)                 // NANDF_CS0
 
 #define BUZZER                                (0)

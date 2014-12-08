@@ -1,0 +1,16 @@
+
+pb->period					= 20000000 ns;
+pb->lth_brightness	= data->lth_brightness * (data->pwm_period_ns / data->max_brightness);
+										= 0 * (20000000 / 180)
+										= 0;
+										
+props.max_brightness = data->max_brightness = 180;
+bl->props.brightness = data->dft_brightness = 0;
+
+
+¶æ»úÖÜÆÚ20ms = 20000000 ns
+duty time = 0.5ms = 500000 ns			-90 degree		duty cycle = 0.025
+duty time = 1.0ms = 1000000 ns		-45 degree		duty cycle = 0.05
+duty time = 1.5ms = 1500000 ns		-0 degree			duty cycle = 0.075
+duty time = 2.0ms = 2000000 ns		+45 degree		duty cycle = 0.1
+duty time = 2.5ms = 2500000 ns		+90 degree		duty cycle = 0.125

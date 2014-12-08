@@ -5,13 +5,13 @@ all:
 	make -C $(KERN_DIR) M=`pwd` modules
 
 app:
-	arm-linux-gcc -Wall mars_ultrasonic_app.c -o mars_ultrasonic_app
+	arm-linux-gcc -Wall mars_buzzer_pwm_app.c -o mars_buzzer_pwm_app
 
 clean:
 	make -C $(KERN_DIR) M=`pwd` modules clean
 
 cleanapp:
-	rm -f mars_ultrasonic_app
+	rm -f mars_buzzer_pwm_app
 
-obj-m += mars_ultrasonic_drv.o
+obj-m += mars_buzzer_pwm_drv.o
 

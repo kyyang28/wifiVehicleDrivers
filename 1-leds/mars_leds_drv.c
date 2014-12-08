@@ -34,8 +34,6 @@ static struct class *mars_leds_cls = NULL;
 
 static void mars_leds_drv_cleanup_module(void);
 
-//#define GPIO_TO_PIN(bank, gpio)             (32 * (bank) + (gpio))    // TI AM3359
-
 #define MARS_LED_GPIO_17__GPIO_7_PIN             IMX_GPIO_NR(7,12)
 
 #define USER1                               (0)

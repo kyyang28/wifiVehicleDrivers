@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     float Ultr_Temp1 = 0;
     float Ultr_Temp2 = 0;
 
-    iFd_ultra = open(ULTRA_DEVICE_NAME, O_RDWR);  
+    iFd_ultra = open(ULTRA_DEVICE_NAME, O_RDWR);
     if (iFd_ultra < 0) {  
         printf("Failed to open /dev/mars_ultrasonic!\n");
         return -1;
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     memset(highlvl_duration, 0, sizeof(highlvl_duration));
 
     while (1) 
-    {  
+    {
         Ultr_Temp1 = 0;
         Ultr_Temp2 = 0;
 
@@ -60,13 +60,11 @@ int main(int argc, char *argv[])
         printf("[%s][Ultra1] %1.4f cm\n", __FUNCTION__, gul_distance1);
         printf("[%s][Ultra2] %1.4f cm\n", __FUNCTION__, gul_distance2);
 
-#if 1
-        if (gul_distance1 < 10) {
+        if (gul_distance2 < 35) {
             ioctl(iFd_buzzer, BUZZER, BUZZER_HIGH);
         }else {
             ioctl(iFd_buzzer, BUZZER, BUZZER_LOW);
         }
-#endif
         
         //sleep(1);
     }

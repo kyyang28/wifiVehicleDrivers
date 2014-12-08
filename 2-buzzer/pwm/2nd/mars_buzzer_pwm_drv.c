@@ -176,17 +176,17 @@ static struct platform_driver mars_pwm_buzzer_driver = {
 	.remove		= mars_pwm_buzzer_remove,
 };
 
-static int __init mars_pwm_buzzer_init(void)
+static int __init mars_pwm_backlight_init(void)
 {
 	return platform_driver_register(&mars_pwm_buzzer_driver);
 }
-module_init(mars_pwm_buzzer_init);
+module_init(mars_pwm_backlight_init);
 
-static void __exit mars_pwm_buzzer_exit(void)
+static void __exit mars_pwm_backlight_exit(void)
 {
 	platform_driver_unregister(&mars_pwm_buzzer_driver);
 }
-module_exit(mars_pwm_buzzer_exit);
+module_exit(mars_pwm_backlight_exit);
 
 MODULE_DESCRIPTION("PWM based Buzzer Driver");
 MODULE_LICENSE("GPL");
