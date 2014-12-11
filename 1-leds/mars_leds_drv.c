@@ -54,20 +54,13 @@ static int Request_Mars_Led_Gpio(unsigned gpio, char *gpioReqName)
     return status;
 }
 
-/* whichWay = 0 means output, otherwise 1 means input */
-static int Set_Mars_Led_Gpio_Direction(unsigned gpio, int whichWay)
+static int Set_Mars_Led_Gpio_Direction(unsigned gpio, int level)
 {
     int status = 0;
 
-    if (0 == whichWay) {    
-        status = gpio_direction_output(gpio, whichWay);
-        if (status < 0)
-            pr_warning("Failed to setup the gpio's output direction\n");
-    }else {
-        status = gpio_direction_input(gpio);
-        if (status < 0)
-            pr_warning("Failed to setup the gpio's input direction\n");
-    }
+    status = gpio_direction_output(gpio, level);
+    if (status < 0)
+        pr_warning("Failed to setup the led's output direction\n");
     
     return status;
 }
@@ -80,7 +73,7 @@ static int mars_leds_init(void)
 
     status = Request_Mars_Led_Gpio(MX6Q_PAD_NANDF_D5__GPIO_2_5_PIN, "user1\n");
 
-    status = Set_Mars_Led_Gpio_Direction(MX6Q_PAD_NANDF_D5__GPIO_2_5_PIN, 0);     // 0 = output
+    status = Set_Mars_Led_Gpio_Direction(MX6Q_PAD_NANDF_D5__GPIO_2_5_PIN, 1);     // 1 = high level leds off, 0 = low level leds on
     
     return status;
 }
