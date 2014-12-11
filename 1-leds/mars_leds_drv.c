@@ -34,7 +34,7 @@ static struct class *mars_leds_cls = NULL;
 
 static void mars_leds_drv_cleanup_module(void);
 
-#define MARS_LED_GPIO_17__GPIO_7_PIN             IMX_GPIO_NR(7,12)
+#define MX6Q_PAD_NANDF_D5__GPIO_2_5_PIN                     IMX_GPIO_NR(2,5)        // P1-J10 LEDS Pin24
 
 #define USER1                               (0)
 
@@ -76,11 +76,11 @@ static int mars_leds_init(void)
 {
     int status;
 
-    Free_Mars_Led_Gpio(MARS_LED_GPIO_17__GPIO_7_PIN);
+    Free_Mars_Led_Gpio(MX6Q_PAD_NANDF_D5__GPIO_2_5_PIN);
 
-    status = Request_Mars_Led_Gpio(MARS_LED_GPIO_17__GPIO_7_PIN, "user1\n");
+    status = Request_Mars_Led_Gpio(MX6Q_PAD_NANDF_D5__GPIO_2_5_PIN, "user1\n");
 
-    status = Set_Mars_Led_Gpio_Direction(MARS_LED_GPIO_17__GPIO_7_PIN, 0);     // 0 = output
+    status = Set_Mars_Led_Gpio_Direction(MX6Q_PAD_NANDF_D5__GPIO_2_5_PIN, 0);     // 0 = output
     
     return status;
 }
@@ -95,9 +95,9 @@ static int Config_Mars_Led_GPIO_Level(unsigned gpio, int level)
 static void mars_led_usr1_ctl(unsigned long status)
 {
     if (status) {
-        Config_Mars_Led_GPIO_Level(MARS_LED_GPIO_17__GPIO_7_PIN, 1);
+        Config_Mars_Led_GPIO_Level(MX6Q_PAD_NANDF_D5__GPIO_2_5_PIN, 1);
     }else { 
-        Config_Mars_Led_GPIO_Level(MARS_LED_GPIO_17__GPIO_7_PIN, 0);
+        Config_Mars_Led_GPIO_Level(MX6Q_PAD_NANDF_D5__GPIO_2_5_PIN, 0);
     }
 }
 
@@ -183,7 +183,7 @@ static int __init mars_leds_drv_init(void)
     /* Step 4: Hardware related setup */
     mars_leds_init();
 
-    printk(KERN_NOTICE "+------ %s is invoked successfully! ------+\n", __FUNCTION__);
+    printk(KERN_NOTICE "+------ Led's driver is installed successfully! ------+\n");
     return 0;
     
 fail:
@@ -196,7 +196,7 @@ module_init(mars_leds_drv_init);
 static void __exit mars_leds_drv_exit(void)
 {
     mars_leds_drv_cleanup_module();
-    printk(KERN_NOTICE "+------ %s is invoked successfully! ------+\n", __FUNCTION__);
+    printk(KERN_NOTICE "+------ Led's driver is leaving away! ------+\n");
 }
 module_exit(mars_leds_drv_exit);
 
